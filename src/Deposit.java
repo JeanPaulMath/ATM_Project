@@ -1,5 +1,4 @@
 public class Deposit extends Transaction{
-    private double amount;
     private Keypad keypad;
     private DepositSlot depositSlot;
     private final static int DEPOSIT_CANCELLED = 0;
@@ -16,7 +15,7 @@ public class Deposit extends Transaction{
         BankDB bankDB = getBankDB();
         Screen screen = getScreen();
 
-        amount = askForDepositAmount();
+        double amount = askForDepositAmount();
 
         if (amount != DEPOSIT_CANCELLED) {
             screen.messageToUser("\n Insert your deposit envelope of ");
@@ -28,7 +27,7 @@ public class Deposit extends Transaction{
             if (envelopeRecieved){
                 screen.messageToUserLine("\nYour deposit has been received.\nNOTE: your transaction will not be shown until it is processed. ");
 
-                bankDB.creditBalance(getAccountNumber(),amount);
+                bankDB.creditBalance(getAccountNumber(), amount);
             }
             else {
                 screen.messageToUserLine("Deposit cancelled. The envelope was not inserted.");

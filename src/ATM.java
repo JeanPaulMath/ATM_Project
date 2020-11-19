@@ -22,7 +22,7 @@ public class ATM {
         bankDB = new BankDB();
     }
 
-    public void run(){
+    public void runATM(){
 
         while(true){
 
