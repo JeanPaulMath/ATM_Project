@@ -5,7 +5,7 @@ public class BalanceInquiry extends Transaction{
     }
 
     @Override
-    public void execute() {
+    public void executeTransaction() {
         BankDB bankDB = getBankDB();
         Screen screen = getScreen();
 

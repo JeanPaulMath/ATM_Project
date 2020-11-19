@@ -1,6 +1,6 @@
 public class DepositSlot {
 
-    public boolean isenvelopedRecieved(){
+    public boolean isEnvelopedRecieved(){
         return true;
     }
 }

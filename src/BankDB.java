@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class BankDB {
     private Account[] accounts;
 
@@ -30,19 +32,19 @@ public class BankDB {
     }
 
     public double getAvailableBalance(int userAccountNumber){
-        return getAccount(userAccountNumber).getAvailableBalance();
+        return Objects.requireNonNull(getAccount(userAccountNumber)).getAvailableBalance();
     }
 
     public double getTotalBalance(int userAccountNumber){
-        return getAccount(userAccountNumber).getTotalBalance();
+        return Objects.requireNonNull(getAccount(userAccountNumber)).getTotalBalance();
     }
 
     public void creditBalance(int userAccountNumber, double amount){
-        getAccount(userAccountNumber).creditBalance(amount);
+        Objects.requireNonNull(getAccount(userAccountNumber)).creditBalance(amount);
     }
 
     public void debitBalance(int userAccountNumber, double amount){
-        getAccount(userAccountNumber).debitBalance(amount);
+        Objects.requireNonNull(getAccount(userAccountNumber)).debitBalance(amount);
     }
 
 }

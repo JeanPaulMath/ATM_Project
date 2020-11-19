@@ -55,7 +55,6 @@ public class ATM {
     }
 
     private void performTransactions(){
-        Transaction cuurTransaction = null;
 
         boolean userExited = false;
 
@@ -66,8 +65,7 @@ public class ATM {
                 case BALANCE_AMOUNT:
                 case WITHDRAWAL:
                 case DEPOSIT:
-                    cuurTransaction = createTransaction(mainMenuChoice);
-                    cuurTransaction.execute();
+                    createTransaction(mainMenuChoice).executeTransaction();
                     break;
                 case EXIT:
                     screen.messageToUserLine("\nExiting the System...");

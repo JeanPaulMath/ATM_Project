@@ -3,7 +3,7 @@ public class Withdrawal extends Transaction {
     private Keypad keypad;
     private CashDispenser dispenser;
 
-    private final static int CANCELED = 6;
+    private final static int WITHDRAWAL_CANCELLED = 6;
 
     public Withdrawal(int accountNumber, Screen screen, BankDB bankDB, Keypad atmKeypad, CashDispenser atmDispenser) {
         super(accountNumber, screen, bankDB);
@@ -14,7 +14,7 @@ public class Withdrawal extends Transaction {
 
 
     @Override
-    public void execute() {
+    public void executeTransaction() {
         boolean cashDispensed = false;
         double availableBalance;
 
@@ -24,7 +24,7 @@ public class Withdrawal extends Transaction {
         do {
             amount = displayMenuOfAmounts();
 
-            if (amount != CANCELED){
+            if (amount != WITHDRAWAL_CANCELLED){
                 availableBalance = bankDB.getAvailableBalance(getAccountNumber());
 
                 if (amount<= availableBalance){
@@ -79,8 +79,8 @@ public class Withdrawal extends Transaction {
                 case 5:
                     userChoice = amounts[input];
                     break;
-                case CANCELED:
-                    userChoice = CANCELED;
+                case WITHDRAWAL_CANCELLED:
+                    userChoice = WITHDRAWAL_CANCELLED;
                     break;
                 default:
                     screen.messageToUserLine("Invalid choice. Try Again.");

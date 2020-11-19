@@ -2,7 +2,7 @@ public class Deposit extends Transaction{
     private double amount;
     private Keypad keypad;
     private DepositSlot depositSlot;
-    private final static int CANCELLED = 0;
+    private final static int DEPOSIT_CANCELLED = 0;
 
     public Deposit(int accountNumber, Screen screen, BankDB bankDB, Keypad atmKeypad, DepositSlot atmDepositSlot) {
         super(accountNumber, screen, bankDB);
@@ -12,20 +12,20 @@ public class Deposit extends Transaction{
     }
 
     @Override
-    public void execute() {
+    public void executeTransaction() {
         BankDB bankDB = getBankDB();
         Screen screen = getScreen();
 
         amount = askForDepositAmount();
 
-        if (amount != CANCELLED) {
+        if (amount != DEPOSIT_CANCELLED) {
             screen.messageToUser("\n Insert your deposit envelope of ");
             screen.displayAcctBalance(amount);
             screen.messageToUserLine(".");
 
-            boolean envelopRecieved = depositSlot.isenvelopedRecieved();
+            boolean envelopeRecieved = depositSlot.isEnvelopedRecieved();
 
-            if (envelopRecieved){
+            if (envelopeRecieved){
                 screen.messageToUserLine("\nYour deposit has been received.\nNOTE: your transaction will not be shown until it is processed. ");
 
                 bankDB.creditBalance(getAccountNumber(),amount);
@@ -47,8 +47,8 @@ public class Deposit extends Transaction{
         screen.messageToUser("\nPlease enter a deposit amount in CENTS (or 0 to cancel): ");
         int input = keypad.getKeypadInput();
 
-        if (input == CANCELLED){
-            return CANCELLED;
+        if (input == DEPOSIT_CANCELLED){
+            return DEPOSIT_CANCELLED;
         }
         else{
             return (double) input/100;

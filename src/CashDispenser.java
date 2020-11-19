@@ -1,9 +1,9 @@
 public class CashDispenser {
-    private final static int BILLS_AVAIALBLE = 500;
+    private final static int BILLS_AVAILABLE = 500;
     private int count;
 
     public CashDispenser(){
-        count = BILLS_AVAIALBLE;
+        count = BILLS_AVAILABLE;
     }
 
     public void dispenseCash(int amount){
