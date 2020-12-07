@@ -22,7 +22,7 @@ public class Deposit extends Transaction{
             screen.displayAcctBalance(amount);
             screen.messageToUserLine(".");
 
-            boolean envelopeRecieved = depositSlot.isEnvelopedRecieved();
+            boolean envelopeRecieved = depositSlot.isEnvelopeRecieved();
 
             if (envelopeRecieved){
                 screen.messageToUserLine("\nYour deposit has been received.\nNOTE: your transaction will not be shown until it is processed. ");

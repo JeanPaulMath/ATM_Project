@@ -1,5 +1,4 @@
 public class Withdrawal extends Transaction {
-    private int amount;
     private Keypad keypad;
     private CashDispenser dispenser;
 
@@ -22,15 +21,15 @@ public class Withdrawal extends Transaction {
         Screen screen = getScreen();
 
         do {
-            amount = displayMenuOfAmounts();
+            int amount = displayMenuOfAmounts();
 
             if (amount != WITHDRAWAL_CANCELLED){
                 availableBalance = bankDB.getAvailableBalance(getAccountNumber());
 
-                if (amount<= availableBalance){
+                if (amount <= availableBalance){
 
                     if (dispenser.sufficientCashAvailable(amount)){
-                        bankDB.debitBalance(getAccountNumber(),amount);
+                        bankDB.debitBalance(getAccountNumber(), amount);
 
                         dispenser.dispenseCash(amount);
                         cashDispensed = true;

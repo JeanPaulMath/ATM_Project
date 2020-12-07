@@ -12,12 +12,7 @@ public class Account {
     }
 
     public boolean validatePIN(int enteredPIN){
-        if (enteredPIN == pinNumber){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return enteredPIN == pinNumber;
     }
 
     public double getAvailableBalance() {

@@ -1,5 +1,6 @@
-public class ATM {
-    private  boolean userAuthentication;
+public class ATM implements AtmStatePattern{
+    private AtmStatePattern receivedCardState;
+    private  boolean userAuthentication = false;
     private int currentAcctNumber;
     private Screen screen;
     private Keypad keypad;
@@ -13,13 +14,56 @@ public class ATM {
     private static final int EXIT = 4;
 
     public ATM(){
-        userAuthentication = false;
         currentAcctNumber = 0;
         screen = new Screen();
         keypad = new Keypad();
         dispenser = new CashDispenser();
         depositSlot = new DepositSlot();
         bankDB = new BankDB();
+        receivedCardState = new NoDebitCardState();
+    }
+
+    public AtmStatePattern getAtmState(){
+        return receivedCardState;
+    }
+
+    public void setAtmState(ATM receivedCardState){
+        this.receivedCardState = receivedCardState;
+    }
+
+    @Override
+    public void insertDebitCard() {
+        AtmStatePattern.insertDebitCard();
+
+        if(receivedCardState instanceof NoDebitCardState)
+        {
+
+            AtmStatePattern hasDebitCardState = new DebitCardUsedState();
+            setAtmState((ATM)receivedCardState);
+            System.out.println("ATM Machine internal state has been moved to : "
+                    + receivedCardState.getClass().getName());
+        }
+    }
+
+    @Override
+    public void ejectDebitCard() {
+        AtmStatePattern.ejectDebitCard();
+
+        if(receivedCardState instanceof DebitCardUsedState)
+        {
+
+            AtmStatePattern noDebitCardState = new NoDebitCardState();
+            setAtmState((ATM)receivedCardState);
+            System.out.println("ATM Machine internal state has been moved to : "
+                    + receivedCardState.getClass().getName());
+        }
+
+    }
+
+    @Override
+    public void enterPinAndWithdrawMoney() {
+        AtmStatePattern.enterPinAndWithdrawMoney();
+
     }
 
     public void runATM(){
